@@ -48,19 +48,17 @@ class Map
   end
 
   def assign(key, value)
-    pairs = @ivar.index {|pair| pair[0] == key}
-    value_holder = @ivar[pairs][1]
+    pairs = @ivar.find_index {|pair| pair[0] == key}
     if pairs.count > 1
-      value_holder = value
+      @ivar[pairs][1] = value
     else
       @ivar << [key, value]
     end
     [key, value]
-
   end
 
   def lookup(key)
-    @ivar.each do {|pair| return pair[1] if pair[0] == key }
+    @ivar.each {|pair| return pair[1] if pair[0] == key }
     nil
   end
 
@@ -83,7 +81,6 @@ class Map
       end
     end
     result
-    end
-
   end
+
 end
